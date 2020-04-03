@@ -77,7 +77,7 @@ class Lock {
 	}
 
 	async all(lockName, timeout, task) {
-		if (!lockName) throw new Error('need lockName');
+		// if (!lockName) throw new Error('need lockName');
 		if (!task && typeof timeout === 'function') {
 			task = timeout;
 			timeout = this.options.defaultTimeout;
@@ -105,7 +105,7 @@ class Lock {
 	}
 
 	async race(lockName, timeout, task, ignore) {
-		if (!lockName) throw new Error('need lockName');
+		// if (!lockName) throw new Error('need lockName');
 		if (typeof timeout === 'function') {
 			ignore = task;
 			task = timeout;
