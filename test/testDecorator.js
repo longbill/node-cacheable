@@ -3,12 +3,12 @@ const expect = require('chai').expect;
 const wait = require('pwait');
 
 getName = cacheable(3)(getName);
-getName(1).then(console.log);
-getName(1).then(console.log);
+// getName(1).then(console.log);
+// getName(1).then(console.log);
 
 let executed = 0;
 async function getName(id) {
-	console.log('real getting name: ' + id);
+	console.log('getting name for: ' + id);
 	return 'name' + id;
 }
 

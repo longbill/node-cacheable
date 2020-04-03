@@ -35,6 +35,40 @@ So if you use `node-cacheable`, there will only be 1 back-end call at the same t
 
 `npm i --save node-cacheable`
 
+## works like a decorator
+
+`require('node-cacheable').cacheable(ttl)(loadFunction)`
+
+example: 
+
+```javascript
+const { cacheable } = require('node-cacheable');
+
+//a normal async function to get data from backend
+async function getName(id) {
+	console.log('getting name for ' + id);
+	// await db.query ....
+	return 'name' + id;
+}
+
+//this simple magic will bring the getName function 
+//cache ability
+//let's cache the result for 60 seconds
+getName = cacheable(60)(getName);
+
+getName(1).then(console.log);
+getName(1).then(console.log);
+
+//outpu:
+/*
+getting name for 1
+name1
+name1
+ */
+```
+
+
+
 ## Basic Usage
 
 `new Cacheable(loadFunction, ttl = 30)`
@@ -68,25 +102,6 @@ clear cache: `instance.clear(key)`
 set cache manually: `instance.prime(key, value)`
 
 
-## cacheable decorator
-
-`require('node-cacheable').cacheable(ttl)(loadFunction)`
-
-example: 
-
-```javascript
-const { cacheable } = require('node-cacheable');
-
-async function getName(id) {
-	console.log('getting name for ' + id);
-	// await db.query ....
-	return 'name' + id;
-}
-getName = cacheable(3)(getName);
-
-getName(1).then(console.log);
-getName(1).then(console.log);
-```
 
 ## License
 
