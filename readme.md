@@ -7,21 +7,21 @@ In-memory cache wrapper with refresh lock.
 
 This is how normal node server works. 
 
-
+![1](https://github.com/longbill/node-cacheable/blob/master/1.png?raw=true)
 
 Every request goes through front-end layer to the back-end layer.  But if the back-end requests are very slow, the front-end layer has to wait.
 
 Then let's add a simple cache to the front-end layer.
 
-
+![2](https://github.com/longbill/node-cacheable/blob/master/2.png?raw=true)
 
 Requests are much faster in most cases now.  But this could only work for low frenquency servers. What if high frequency requests hit this server?
 
-
+![3](https://github.com/longbill/node-cacheable/blob/master/3.png?raw=true)
 
 A lot of un-cached request goes down to the back-end layer at the first time and when the cache expires. This is unacceptable. So here's how `node-cacheable` works.
 
-
+![4](https://github.com/longbill/node-cacheable/blob/master/4.png?raw=true)
 
 When there's no cache in memory, it initiates a back-end request and set a lock in the memory so that the following requests can only wait for the back-end request to finish.  Once the first back-end request returns a value, the value is set as as cache, and the locked requests will also use this value as response.
 
